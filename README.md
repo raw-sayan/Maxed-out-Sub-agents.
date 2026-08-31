@@ -17,7 +17,7 @@
 An AI skill that turns one LLM into a supervised crew of specialists — for any editor, any model, any project.
 
 <p align="center">
-  <img src="![workflow](https://github.com/user-attachments/assets/417cd734-5623-403f-842a-112aa646309c)" alt="Maxed-out Sub-agents workflow" width="800">
+  <img src="./workflow.png" alt="Maxed-out Sub-agents workflow" width="800">
 </p>
 
 Maxed-out Sub-agents is a portable **sub-agent skill**. Pull it into any session, any project, any LLM. It does **not** run as a single generalist. It decomposes the work, assigns **specialist sub-agents**, forces them to work as a crew, and keeps a **Monitor** on the floor for the entire run.
