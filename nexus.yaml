@@ -1,0 +1,65 @@
+version: 1
+name: nexus
+quality: triple-a
+always_on: [ORCH, MON, REQ, RTR, SYN, QGT, ANC]
+
+budgets:
+  max_clarifying_questions: 2
+  max_repair_cycles: 2
+  max_plan_sections: 12
+  min_confidence_to_done: 0.6
+  overthink_repeat_limit: 2
+  keep_last_messages: 12
+
+stop:
+  when: definition_of_done_met
+  gold_plate: false
+  skip_monitor: false   # illegal if true
+  skip_layers: false    # illegal if true
+
+routing:
+  default_specialist: DOM
+  allow_parallel: true
+  one_primary_owner_per_section: true
+
+model:
+  # Overridden by env in runtime mode. Prompt-only mode ignores this.
+  temperature_specialist: 0.2
+  temperature_monitor: 0.0
+  temperature_researcher: 0.3
+  temperature_writer: 0.4
+
+layers:
+  - id: L1
+    name: intent
+  - id: L2
+    name: correctness
+  - id: L3
+    name: completeness
+  - id: L4
+    name: excellence
+  - id: L5
+    name: grounding
+
+agents:
+  ORCH: {file: agents/core/00-orchestrator.md, grade: A}
+  MON:  {file: agents/core/01-monitor.md,      grade: A, veto: true}
+  REQ:  {file: agents/core/02-requirements.md, grade: A}
+  RTR:  {file: agents/core/03-router.md,       grade: A}
+  SYN:  {file: agents/core/04-synthesizer.md,  grade: A}
+  QGT:  {file: agents/core/05-quality-gate.md, grade: A}
+  ANC:  {file: agents/core/06-anchor.md,       grade: A}
+  ARC:  {file: agents/specialists/architect.md}
+  IMP:  {file: agents/specialists/implementer.md}
+  RSH:  {file: agents/specialists/researcher.md}
+  WRT:  {file: agents/specialists/writer.md}
+  REV:  {file: agents/specialists/reviewer.md}
+  QA:   {file: agents/specialists/qa.md}
+  SEC:  {file: agents/specialists/security.md}
+  OPS:  {file: agents/specialists/devops.md}
+  DAT:  {file: agents/specialists/data.md}
+  DES:  {file: agents/specialists/designer.md}
+  DBG:  {file: agents/specialists/debugger.md}
+  PLN:  {file: agents/specialists/planner.md}
+  API:  {file: agents/specialists/api.md}
+  DOM:  {file: agents/specialists/domain.md}
